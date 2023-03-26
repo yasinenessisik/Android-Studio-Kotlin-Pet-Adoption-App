@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.yasinenessisik.adopt_a_pet.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addPet"
+            app:destination="@id/addPetFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_message"
+            app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myHomeFragment"
+            app:destination="@id/myHomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_petInfoFragment"
+            app:destination="@id/petInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.yasinenessisik.adopt_a_pet.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/addPetFragment"
+        android:name="com.yasinenessisik.adopt_a_pet.fragments.AddPetFragment"
+        android:label="fragment_add_pet"
+        tools:layout="@layout/fragment_add_pet" >
+        <action
+            android:id="@+id/action_addPet_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myHomeFragment"
+        android:name="com.yasinenessisik.adopt_a_pet.fragments.MyHomeFragment"
+        android:label="fragment_my_home"
+        tools:layout="@layout/fragment_my_home" >
+        <action
+            android:id="@+id/action_myHomeFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_myHomeFragment_to_petInfoFragment"
+            app:destination="@id/petInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.yasinenessisik.adopt_a_pet.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.yasinenessisik.adopt_a_pet.views.LoginActivity"
+        android:label="activity_login_activity"
+        tools:layout="@layout/activity_login_activity" />
+    <fragment
+        android:id="@+id/petInfoFragment"
+        android:name="com.yasinenessisik.adopt_a_pet.fragments.PetInfoFragment"
+        android:label="fragment_pet_info_frafment"
+        tools:layout="@layout/fragment_pet_info_frafment" >
+        <argument
+            android:name="camefromhome"
+            app:argType="string" />
+        <argument
+            android:name="postid"
+            app:argType="string" />
+        <argument
+            android:name="imageurl"
+            app:argType="string" />
+        <argument android:name="petrace"
+            app:argType="string" />
+        <argument
+            android:name="pet"
+            app:argType="string" />
+        <argument
+            android:name="usermail"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_petInfoFragment_to_myHomeFragment"
+            app:destination="@id/myHomeFragment" />
+    </fragment>
+</navigation>
