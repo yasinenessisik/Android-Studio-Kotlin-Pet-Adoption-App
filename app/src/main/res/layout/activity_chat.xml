@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context= ".fragments.ChatFragment">
+    tools:context= ".views.ChatActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,6 +24,7 @@
                 android:id="@+id/backSpaceImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:onClick="onBackPressed"
                 android:src="@drawable/baseline_keyboard_backspace_24"
                 app:tint="@color/white">
 
@@ -134,17 +135,18 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <ImageView
+            android:id="@+id/sendChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_send_24"
-            android:layout_marginEnd="9dp"
             android:layout_gravity="center"
-            android:padding= "12dp"
-            android:id="@+id/sendChat"
-            android:backgroundTint="#837429"
-            android:background="@drawable/background_shape"
+            android:layout_marginEnd="9dp"
             android:layout_marginBottom="5dp"
-            ></ImageView>
+            android:background="@drawable/background_shape"
+            android:backgroundTint="#837429"
+            android:onClick="sendAMessage"
+            android:padding="12dp"
+            android:src="@drawable/baseline_send_24"></ImageView>
     </LinearLayout>
 </RelativeLayout>
