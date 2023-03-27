@@ -6,7 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.yasinenessisik.adopt_a_pet.databinding.ActivityLoginActivityBinding
+import com.yasinenessisik.adopt_a_pet.model.User
 
 class LoginActivity : AppCompatActivity() {
 
@@ -14,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginActivityBinding
 
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -72,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth.createUserWithEmailAndPassword(userMail,userPassword).addOnCompleteListener{task->
             if(task.isSuccessful){
+                addUserToDatabase(userMail,auth.currentUser!!.uid)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -80,5 +87,9 @@ class LoginActivity : AppCompatActivity() {
         }.addOnFailureListener{exception ->
             Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
         }
+    }
+    private fun addUserToDatabase(email:String, uid:String){
+        database = FirebaseDatabase.getInstance().getReference()
+        database.child("user").child(uid).setValue(User(email,uid))
     }
 }
