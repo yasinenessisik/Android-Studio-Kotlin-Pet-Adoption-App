@@ -5,34 +5,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ChatFragment">
+    tools:context= ".fragments.ChatFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:background="#534E33"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarSize"
+        android:background="#807228"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
+
             <ImageView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
+
+                android:id="@+id/backSpaceImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:src="@drawable/baseline_keyboard_backspace_24"
                 app:tint="@color/white">
 
             </ImageView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-            </TextView>
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/profile"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_launcher_background"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold|normal"></TextView>
+
+                <TextView
+                    android:id="@+id/userStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Online"
+                    android:visibility="invisible"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="normal"></TextView>
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linear01"
+        android:layout_below="@+id/toolbar">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerViewChat"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear02"
+        android:layout_above="@+id/linear01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2"
+        >
+        <androidx.cardview.widget.CardView
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            android:layout_weight="2"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:baselineAligned="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <EditText
+                        android:textColorHint="#424040"
+                        android:id="@+id/messageBox"
+                        android:hint="Ask a question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:padding="5dp"
+                        android:paddingEnd="1dp"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/transparent_background">
+
+                    </EditText>
+
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/attachment"
+                    android:layout_weight="3"
+                    android:src="@drawable/baseline_attach_file_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <ImageView
+                    android:id="@+id/camera"
+                    android:layout_weight="3"
+                    android:src="@drawable/baseline_camera_alt_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_send_24"
+            android:layout_marginEnd="9dp"
+            android:layout_gravity="center"
+            android:padding= "12dp"
+            android:id="@+id/sendChat"
+            android:backgroundTint="#837429"
+            android:background="@drawable/background_shape"
+            android:layout_marginBottom="5dp"
+            ></ImageView>
+    </LinearLayout>
 </RelativeLayout>
