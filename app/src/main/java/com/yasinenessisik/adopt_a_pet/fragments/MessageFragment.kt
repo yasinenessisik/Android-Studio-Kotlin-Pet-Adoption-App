@@ -1,5 +1,6 @@
 package com.yasinenessisik.adopt_a_pet.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -35,6 +36,7 @@ class MessageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_message, container, false)
     }
 
+    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,11 +45,10 @@ class MessageFragment : Fragment() {
 
 
         binding = FragmentMessageBinding.bind(view)
-        recyclerViewAdapter = MessageAdapter(binding.recyclerView.context, userlist)
-
-
+        recyclerViewAdapter = getActivity()?.let { MessageAdapter(it, userlist) }!!
         binding.recyclerView.layoutManager= LinearLayoutManager(context)
         binding.recyclerView.adapter = recyclerViewAdapter
+
 
         database.child("user").addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -55,7 +56,6 @@ class MessageFragment : Fragment() {
                 for (postSnapshot in snapshot.children){
 
                     val currentUser = postSnapshot.getValue(User::class.java)
-
                     if(auth.currentUser?.uid != currentUser?.uid){
                         userlist.add(currentUser!!)
                     }
