@@ -41,6 +41,8 @@ class MessageAdapter(val context: Context, val userlist: ArrayList<User>): Recyc
         holder.itemView.setOnClickListener{
             val intent = Intent(context, ChatActivity::class.java)
 
+
+
             intent.putExtra("email",currentUser.mail)
             intent.putExtra("uid",currentUser.uid)
 

@@ -37,7 +37,7 @@ class ChatActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val intent = Intent()
+        val intent = getIntent()
         val email = intent.getStringExtra("email")
         val receiverUid = intent.getStringExtra("uid")
 
@@ -50,13 +50,10 @@ class ChatActivity : AppCompatActivity() {
         receiverRoom = senderUid+receiverUid
 
 
-        println(email)
-        println(receiverUid)
 
-        binding.userName.text = email
         messageBox = binding.messageBox
         sendButton = binding.sendChat
-        recyclerView = binding.recyclerViewChat
+        recyclerView = binding.recyclerView
 
         messageList = ArrayList<Message>()
         chatAdapter = ChatAdapter(messageList)
@@ -73,11 +70,17 @@ class ChatActivity : AppCompatActivity() {
                 messageList.clear()
 
                 for(postSnapshot in snapshot.children){
+
                     val message = postSnapshot.getValue(Message::class.java)
+
                     messageList.add(message!!)
 
                 }
+                if (messageList.size>0) {
+                    recyclerView.smoothScrollToPosition(messageList.size - 1);
+                }
                 chatAdapter.notifyDataSetChanged()
+
 
             }
 
@@ -96,15 +99,11 @@ class ChatActivity : AppCompatActivity() {
             database = FirebaseDatabase.getInstance("https://adopt-a-pet-f6709-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
             println(database)
             database.child("chats").child(senderRoom!!).child("messages").push().setValue(messageObject).addOnSuccessListener {
-                println("geldi")
                 database.child("chats").child(receiverRoom!!).child("messages").push().setValue(messageObject)
             }
             messageBox.setText("")
 
-        }
 
-        binding.backSpaceImageView.setOnClickListener{
-            onBackPressed()
         }
 
     }
@@ -113,6 +112,7 @@ class ChatActivity : AppCompatActivity() {
         if ( getFragmentManager().getBackStackEntryCount() > 0)
         {
             getFragmentManager().popBackStack();
+            finish()
             return;
         }
         super.onBackPressed();

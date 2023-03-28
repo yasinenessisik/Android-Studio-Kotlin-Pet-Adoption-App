@@ -6,147 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context= ".views.ChatActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:background="#807228"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentTop="true"
         >
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <ImageView
-
-                android:id="@+id/backSpaceImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:onClick="onBackPressed"
-                android:src="@drawable/baseline_keyboard_backspace_24"
-                app:tint="@color/white">
-
-            </ImageView>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:id="@+id/profile"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:src="@drawable/ic_launcher_background"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="center"
-                >
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/userName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Profile Name"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold|normal"></TextView>
-
-                <TextView
-                    android:id="@+id/userStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Online"
-                    android:visibility="invisible"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="normal"></TextView>
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/linear01"
-        android:layout_below="@+id/toolbar"
-        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerViewChat"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear02"
-        android:layout_above="@+id/linear01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:weightSum="2"
+        android:id="@+id/linearLayout"
         android:background="@drawable/bottom_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
         >
-        <androidx.cardview.widget.CardView
-            app:cardUseCompatPadding="true"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="10dp"
-            android:layout_weight="2"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:baselineAligned="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <EditText
-                        android:textColorHint="#424040"
-                        android:id="@+id/messageBox"
-                        android:hint="Ask a question"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:padding="5dp"
-                        android:paddingEnd="1dp"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:background="@drawable/transparent_background">
-
-                    </EditText>
-
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
+    <EditText
+        android:id="@+id/messageBox"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="80"
+        android:hint="Type a message"
+        android:layout_marginLeft="15dp"
+        >
+    </EditText>
         <ImageView
             android:id="@+id/sendChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="9dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/background_shape"
-            android:backgroundTint="#837429"
-            android:onClick="sendAMessage"
-            android:padding="12dp"
-            android:src="@drawable/baseline_send_24"></ImageView>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_send_24"
+            android:layout_weight="20"
+            ></ImageView>
     </LinearLayout>
 </RelativeLayout>
