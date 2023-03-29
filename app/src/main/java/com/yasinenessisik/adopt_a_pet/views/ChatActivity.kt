@@ -119,7 +119,6 @@ class ChatActivity : AppCompatActivity() {
             database =
                 FirebaseDatabase.getInstance("https://adopt-a-pet-f6709-default-rtdb.europe-west1.firebasedatabase.app/")
                     .getReference()
-            println(database)
             database.child("chats").child(senderRoom!!).child("messages").push()
                 .setValue(messageObject).addOnSuccessListener {
                 database.child("chats").child(receiverRoom!!).child("messages").push()

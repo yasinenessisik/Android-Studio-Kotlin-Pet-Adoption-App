@@ -53,41 +53,24 @@ class MessageFragment : Fragment() {
 
         database.child("user").addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                userlist.clear()
                 for (postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(User::class.java)
                     if(auth.currentUser?.uid != currentUser?.uid){
-                        database.child("chats").addValueEventListener(object :ValueEventListener{
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                userlist.clear()
-                                for (postSnapshot in snapshot.children) {
-                                    if(auth.currentUser?.uid+""+currentUser?.uid == postSnapshot.key){
-                                        userlist.add(currentUser!!)
-                                    }
-                                    recyclerViewAdapter.notifyDataSetChanged()
-                                }
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-
-                            }
-
-                        })
-
-
+                            database.child("chats").get()
+                            userlist.add(currentUser!!)
                     }
-
-
 
                 }
 
+                recyclerViewAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-
-
             }
 
         })
+
 
     }
 

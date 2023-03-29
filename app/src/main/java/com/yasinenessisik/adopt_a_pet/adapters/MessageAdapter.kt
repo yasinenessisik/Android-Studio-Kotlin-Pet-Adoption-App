@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.databinding.RecyclerRowMessageBinding
 import com.yasinenessisik.adopt_a_pet.model.User
@@ -33,8 +32,9 @@ class MessageAdapter(val context: Context, val userlist: ArrayList<User>): Recyc
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-
+        holder.setIsRecyclable(false);
         val currentUser = userlist[position]
+
 
         binding.txtName.text = currentUser.mail
 
@@ -49,6 +49,7 @@ class MessageAdapter(val context: Context, val userlist: ArrayList<User>): Recyc
 
             context.startActivity(intent)
         }
+
 
     }
 }
