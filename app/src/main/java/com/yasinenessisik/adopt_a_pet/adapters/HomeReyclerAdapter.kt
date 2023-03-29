@@ -30,12 +30,15 @@ class HomeReyclerAdapter(val postList : ArrayList<Post>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        binding.petName.text = postList[position].pet
-        binding.petBreed.text = postList[position].petRace
+        binding.petName.text = postList[position].petspecies
+        binding.petBreed.text = postList[position].petbreed
         binding.userMail.text = postList[position].usermail
         Picasso.get().load(postList[position].imageurl).into(binding.petImage)
+        if(postList[position].peturgency?.toInt() == 1) {
+            binding.background.setBackgroundResource(R.color.urgent)
+        }
         binding.cardView.setOnClickListener{
-            var action = HomeFragmentDirections.actionHomeFragmentToPetInfoFragment("camefromhome",postList[position].docId,postList[position].imageurl,postList[position].petRace,postList[position].pet,postList[position].usermail)
+            val action = HomeFragmentDirections.actionHomeFragmentToPetInfoFragment("camefromhome",postList[position])
             Navigation.findNavController(it).navigate(action)
         }
     }

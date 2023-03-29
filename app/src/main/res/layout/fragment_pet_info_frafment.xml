@@ -15,8 +15,8 @@
          android:layout_gravity="center"
         android:src="@drawable/gorsel" />
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/pet_name"
         android:text="Pet Name"
         android:textSize="20sp">
@@ -24,14 +24,63 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pet_breed"
-        android:text="Pet Name"
+        android:id="@+id/pet_species"
+        android:text="Pet Species"
         android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_breed"
+        android:text="Pet Breed"
+        android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_age"
+        android:text="Pet Age"
+        android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_city"
+        android:text="Pet City"
+        android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_district"
+        android:text="Pet District"
+        android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_gender"
+        android:text="Pet Gender"
+        android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_explanation"
+        android:text="Pet Explanation"
+        android:textSize="20sp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_urgency"
+        android:text="Pet Urgency"
+        android:textSize="20sp"></TextView>
+
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="delete"
-        android:text="Button" />
+        android:text="delete" />
+    <Button
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="message"
+        android:text="Message" />
 </LinearLayout>
