@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.databinding.RecyclerRowBinding
-import com.yasinenessisik.adopt_a_pet.fragments.HomeFragmentDirections
 import com.yasinenessisik.adopt_a_pet.fragments.MyHomeFragmentDirections
 import com.yasinenessisik.adopt_a_pet.model.Post
 
@@ -27,14 +26,14 @@ class MyHomeRecyclerAdapter(val postList : ArrayList<Post>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: HomeReyclerAdapter.PostHolder, position: Int) {
-        binding.petName.text = postList[position].pet
-        binding.petBreed.text = postList[position].petRace
+        binding.petName.text = postList[position].petname
+        binding.petBreed.text = postList[position].petbreed
         binding.userMail.text = postList[position].usermail
         Picasso.get().load(postList[position].imageurl).into(binding.petImage)
+        println(postList[position])
         binding.cardView.setOnClickListener{
-            var action = MyHomeFragmentDirections.actionMyHomeFragmentToPetInfoFragment("camefrommyhome",postList[position].docId,postList[position].imageurl,postList[position].petRace,postList[position].pet,postList[position].usermail)
+            var action = MyHomeFragmentDirections.actionMyHomeFragmentToPetInfoFragment("camefrommyhome",postList[position])
             Navigation.findNavController(it).navigate(action)
-
         }
     }
 

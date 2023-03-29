@@ -1,19 +1,19 @@
 package com.yasinenessisik.adopt_a_pet.views
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.yasinenessisik.adopt_a_pet.adapters.ChatAdapter
-import com.yasinenessisik.adopt_a_pet.adapters.HomeReyclerAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.ActivityChatBinding
 import com.yasinenessisik.adopt_a_pet.model.Message
+
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -93,16 +93,8 @@ class ChatActivity : AppCompatActivity() {
         })
 
         binding.sendChat.setOnClickListener{
-            val message = messageBox.text.toString()
-            val messageObject = Message(message, FirebaseAuth.getInstance().currentUser?.uid)
 
-            database = FirebaseDatabase.getInstance("https://adopt-a-pet-f6709-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
-            println(database)
-            database.child("chats").child(senderRoom!!).child("messages").push().setValue(messageObject).addOnSuccessListener {
-                database.child("chats").child(receiverRoom!!).child("messages").push().setValue(messageObject)
-            }
-            messageBox.setText("")
-
+            sendMessage()
 
         }
 
@@ -117,6 +109,26 @@ class ChatActivity : AppCompatActivity() {
         }
         super.onBackPressed();
     }
+
+    fun sendMessage(){
+        val message = messageBox.text.toString()
+
+        if (!message.equals("")) {
+            val messageObject = Message(message, FirebaseAuth.getInstance().currentUser?.uid)
+
+            database =
+                FirebaseDatabase.getInstance("https://adopt-a-pet-f6709-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference()
+            println(database)
+            database.child("chats").child(senderRoom!!).child("messages").push()
+                .setValue(messageObject).addOnSuccessListener {
+                database.child("chats").child(receiverRoom!!).child("messages").push()
+                    .setValue(messageObject)
+            }
+            messageBox.setText("")
+        }
+    }
+
 
 
 }
