@@ -191,7 +191,7 @@ class AddPetFragment : Fragment() {
 
                     //veritabanı işlemlerini
 
-                    println("basarili")
+
                     val postHashMap = hashMapOf<String, Any>()
 
                     postHashMap.put("imageurl",downloadUrl)

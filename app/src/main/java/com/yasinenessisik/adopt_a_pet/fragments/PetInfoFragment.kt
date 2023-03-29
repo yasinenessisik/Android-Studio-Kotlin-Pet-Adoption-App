@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -73,7 +74,9 @@ class PetInfoFragment : Fragment() {
 
                 if(cameInfo.equals("camefromhome")){
                     binding.delete.visibility = View.INVISIBLE
-                    binding.message.visibility = View.VISIBLE
+                    if(FirebaseAuth.getInstance().currentUser?.uid != postobje.useruid) {
+                        binding.message.visibility = View.VISIBLE
+                    }
                 }else {
                     binding.delete.visibility = View.VISIBLE
                     binding.message.visibility = View.INVISIBLE

@@ -101,7 +101,6 @@ class HomeFragment : Fragment() {
 
                                 )
                             postList.add(indirilenPost)
-                            println(docId)
 
                         }
                         recyclerViewAdapter.notifyDataSetChanged()

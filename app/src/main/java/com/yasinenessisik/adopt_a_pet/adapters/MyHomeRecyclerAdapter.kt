@@ -30,7 +30,6 @@ class MyHomeRecyclerAdapter(val postList : ArrayList<Post>) : RecyclerView.Adapt
         binding.petBreed.text = postList[position].petbreed
         binding.userMail.text = postList[position].usermail
         Picasso.get().load(postList[position].imageurl).into(binding.petImage)
-        println(postList[position])
         binding.cardView.setOnClickListener{
             var action = MyHomeFragmentDirections.actionMyHomeFragmentToPetInfoFragment("camefrommyhome",postList[position])
             Navigation.findNavController(it).navigate(action)
