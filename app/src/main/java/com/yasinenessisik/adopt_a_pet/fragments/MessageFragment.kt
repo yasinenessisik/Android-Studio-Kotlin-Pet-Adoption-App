@@ -57,13 +57,42 @@ class MessageFragment : Fragment() {
                 for (postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(User::class.java)
                     if(auth.currentUser?.uid != currentUser?.uid){
-                            database.child("chats").get()
-                            userlist.add(currentUser!!)
+
+
+
+
+                            database.child("chats").addValueEventListener(object :ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    var room =auth.currentUser?.uid+""+currentUser?.uid
+                                        var room1=currentUser?.uid+""+auth.currentUser?.uid
+                                    for (postSnapshot in snapshot.children) {
+                                        if (!userlist.contains(currentUser)) {
+                                            if (room.equals(postSnapshot.key)) {
+                                                userlist.add(currentUser!!)
+                                            } else if (room1.equals(postSnapshot.key)) {
+                                                userlist.add(currentUser!!)
+                                            }
+                                        }
+                                    }
+                                    recyclerViewAdapter.notifyDataSetChanged()
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+
+
+                                }
+
+
+                            })
+
+
+
+
+
                     }
 
                 }
 
-                recyclerViewAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
