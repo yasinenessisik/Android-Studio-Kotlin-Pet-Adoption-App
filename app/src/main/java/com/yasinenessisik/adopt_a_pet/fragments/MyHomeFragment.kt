@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.adapters.MyHomeRecyclerAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.FragmentMyHomeBinding
@@ -56,9 +57,22 @@ class MyHomeFragment : Fragment() {
 
 
         auth.currentUser?.let {
-            realtimedb.reference.child("user").child(it.uid).child("nickname").get()
+            realtimedb.reference.child("user").child(it.uid).child("mail").get()
                 .addOnSuccessListener {
                     binding.userMail.setText(it.value.toString())
+                }
+        }
+        auth.currentUser?.let {
+            realtimedb.reference.child("user").child(it.uid).child("nickname").get()
+                .addOnSuccessListener {
+                    binding.userNickname.setText(it.value.toString())
+                }
+        }
+
+        auth.currentUser?.let { it ->
+            realtimedb.reference.child("user").child(it.uid).child("downloadUrl").get()
+                .addOnSuccessListener {
+                    Picasso.get().load(it.value.toString()).into(binding.profileImage)
                 }
         }
         getData()
