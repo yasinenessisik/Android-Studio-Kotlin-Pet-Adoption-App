@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MyHomeFragment">
+    tools:context=".fragments.MyHomeFragment"
+    android:gravity="center">
     <ImageButton
         android:id="@+id/logOut"
         android:layout_width="wrap_content"
@@ -15,12 +16,19 @@
         android:src="@drawable/baseline_logout_24"
         android:layout_gravity="right"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/download" />
+   <de.hdodenhof.circleimageview.CircleImageView
+       android:layout_width="200dp"
+       android:layout_height="200dp"
+       android:src="@drawable/gorsel"
+       ></de.hdodenhof.circleimageview.CircleImageView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="user_mail"
+        android:id="@+id/user_mail"
+        android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

@@ -55,12 +55,16 @@ class ChatActivity : AppCompatActivity() {
         sendButton = binding.sendChat
         recyclerView = binding.recyclerView
 
+        binding.userMail.setText(email)
+
         messageList = ArrayList<Message>()
         chatAdapter = ChatAdapter(messageList)
         recyclerView.layoutManager=LinearLayoutManager(applicationContext)
         recyclerView.adapter = chatAdapter
 
-
+        binding.back.setOnClickListener {
+            onBackPressed()
+        }
 
 
         database = FirebaseDatabase.getInstance().getReference()
