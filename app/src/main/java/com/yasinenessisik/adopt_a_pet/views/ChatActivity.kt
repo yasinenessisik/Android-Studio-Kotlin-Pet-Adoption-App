@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.yasinenessisik.adopt_a_pet.adapters.ChatAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.ActivityChatBinding
 import com.yasinenessisik.adopt_a_pet.model.Message
@@ -36,11 +37,23 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        database = FirebaseDatabase.getInstance().getReference()
         val intent = getIntent()
         val email = intent.getStringExtra("email")
         val receiverUid = intent.getStringExtra("uid")
 
+        if (receiverUid != null) {
+            database.child("user").child(receiverUid).child("downloadUrl").get()
+                .addOnSuccessListener {
+                    Picasso.get().load(it.value.toString()).into(binding.profileImage)
+                }
+        }
+        if (receiverUid != null) {
+            database.child("user").child(receiverUid).child("nickname").get()
+                .addOnSuccessListener {
+                    binding.userNickname.setText(it.value.toString())
+                }
+        }
 
 
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
@@ -56,7 +69,6 @@ class ChatActivity : AppCompatActivity() {
         recyclerView = binding.recyclerView
 
         binding.userMail.setText(email)
-
         messageList = ArrayList<Message>()
         chatAdapter = ChatAdapter(messageList)
         recyclerView.layoutManager=LinearLayoutManager(applicationContext)
@@ -67,7 +79,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
 
-        database = FirebaseDatabase.getInstance().getReference()
+
         database.child("chats").child(senderRoom!!).child("messages").addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
 
