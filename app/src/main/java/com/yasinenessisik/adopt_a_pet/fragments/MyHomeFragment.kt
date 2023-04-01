@@ -49,6 +49,7 @@ class MyHomeFragment : Fragment() {
         binding.recyclerView.adapter = recyclerViewAdapter
         auth = FirebaseAuth.getInstance()
         database = FirebaseFirestore.getInstance()
+        binding.userMail.setText(auth.currentUser?.email)
 
         getData()
 
