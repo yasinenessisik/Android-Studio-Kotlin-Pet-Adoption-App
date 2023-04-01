@@ -17,15 +17,22 @@
         android:layout_gravity="right"/>
 
    <de.hdodenhof.circleimageview.CircleImageView
+       android:id="@+id/profile_image"
        android:layout_width="200dp"
        android:layout_height="200dp"
-       android:src="@drawable/gorsel"
        ></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:text="user_nickname"
+        android:id="@+id/user_nickname"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
         android:text="user_mail"
         android:id="@+id/user_mail"
         android:textStyle="bold"/>

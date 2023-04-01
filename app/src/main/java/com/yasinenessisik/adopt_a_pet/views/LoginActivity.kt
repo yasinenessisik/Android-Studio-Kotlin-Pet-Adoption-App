@@ -38,6 +38,13 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.signUp.setOnClickListener {
+            val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+
     }
 
     fun signIn(view: View) {
@@ -68,26 +75,5 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
-    fun signUp(view: View){
 
-
-        var userMail = binding.loginEmailText.text.toString()
-        var userPassword = binding.loginPasswordText.text.toString()
-
-        auth.createUserWithEmailAndPassword(userMail,userPassword).addOnCompleteListener{task->
-            if(task.isSuccessful){
-                addUserToDatabase(userMail,auth.currentUser!!.uid)
-                val intent = Intent(this, NavigationBarActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-
-        }.addOnFailureListener{exception ->
-            Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
-        }
-    }
-    private fun addUserToDatabase(email:String, uid:String){
-        database = FirebaseDatabase.getInstance().getReference()
-        database.child("user").child(uid).setValue(User(email,uid))
-    }
 }

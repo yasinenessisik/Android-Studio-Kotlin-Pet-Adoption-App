@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AdoptaPet"
         tools:targetApi="31">
         <activity
-            android:name=".SignUp"
+            android:name=".views.SignUp"
             android:exported="false" />
         <activity
             android:name=".views.MainActivity"
