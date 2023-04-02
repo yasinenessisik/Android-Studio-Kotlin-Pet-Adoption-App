@@ -6,14 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context= ".views.ChatActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/bottom_bar"
+    android:id="@+id/top_bar"
+    android:gravity="left"
+    android:orientation="horizontal"
+    android:layout_marginStart="0dp"
+    >
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/back"
+        android:src="@drawable/baseline_keyboard_backspace_24"
+
+        ></ImageView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/profile_image">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:gravity="top">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile Name"
+        android:textSize="13sp"
+        android:id="@+id/user_mail">
+
+    </TextView>
+
+        <TextView
+            android:id="@+id/user_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="deneme"
+            android:textSize="12sp"
+            >
+
+        </TextView>
+    </LinearLayout>
+</LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
-        android:layout_alignParentTop="true"
-        >
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@+id/top_bar"></androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
         android:id="@+id/linearLayout"
         android:background="@drawable/bottom_shape"

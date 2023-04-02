@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.yasinenessisik.adopt_a_pet.databinding.ActivityLoginActivityBinding
-import com.yasinenessisik.adopt_a_pet.model.User
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,6 +36,13 @@ class LoginActivity : AppCompatActivity() {
             var intent = Intent(this, NavigationBarActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        binding.signUp.setOnClickListener {
+            val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+            finish()
+
         }
 
     }
@@ -68,26 +75,25 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
-    fun signUp(view: View){
+    fun resetPassword(view: View){
+        val emailAddress = binding.loginEmailText.text.toString()
+        if (emailAddress.length>0) {
+
+            Firebase.auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Message sent", Toast.LENGTH_LONG).show()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_LONG).show()
+                }
 
 
-        var userMail = binding.loginEmailText.text.toString()
-        var userPassword = binding.loginPasswordText.text.toString()
 
-        auth.createUserWithEmailAndPassword(userMail,userPassword).addOnCompleteListener{task->
-            if(task.isSuccessful){
-                addUserToDatabase(userMail,auth.currentUser!!.uid)
-                val intent = Intent(this, NavigationBarActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-
-        }.addOnFailureListener{exception ->
-            Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(this, "Please enter a email", Toast.LENGTH_LONG).show()
         }
+
     }
-    private fun addUserToDatabase(email:String, uid:String){
-        database = FirebaseDatabase.getInstance().getReference()
-        database.child("user").child(uid).setValue(User(email,uid))
-    }
+
 }

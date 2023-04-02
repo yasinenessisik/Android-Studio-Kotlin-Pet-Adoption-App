@@ -1,19 +1,20 @@
 package com.yasinenessisik.adopt_a_pet.views
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import com.yasinenessisik.adopt_a_pet.adapters.ChatAdapter
-import com.yasinenessisik.adopt_a_pet.adapters.HomeReyclerAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.ActivityChatBinding
 import com.yasinenessisik.adopt_a_pet.model.Message
+
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -36,11 +37,23 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        database = FirebaseDatabase.getInstance().getReference()
         val intent = getIntent()
         val email = intent.getStringExtra("email")
         val receiverUid = intent.getStringExtra("uid")
 
+        if (receiverUid != null) {
+            database.child("user").child(receiverUid).child("downloadUrl").get()
+                .addOnSuccessListener {
+                    Picasso.get().load(it.value.toString()).into(binding.profileImage)
+                }
+        }
+        if (receiverUid != null) {
+            database.child("user").child(receiverUid).child("nickname").get()
+                .addOnSuccessListener {
+                    binding.userNickname.setText(it.value.toString())
+                }
+        }
 
 
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
@@ -55,15 +68,18 @@ class ChatActivity : AppCompatActivity() {
         sendButton = binding.sendChat
         recyclerView = binding.recyclerView
 
+        binding.userMail.setText(email)
         messageList = ArrayList<Message>()
         chatAdapter = ChatAdapter(messageList)
         recyclerView.layoutManager=LinearLayoutManager(applicationContext)
         recyclerView.adapter = chatAdapter
 
+        binding.back.setOnClickListener {
+            onBackPressed()
+        }
 
 
 
-        database = FirebaseDatabase.getInstance().getReference()
         database.child("chats").child(senderRoom!!).child("messages").addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -93,16 +109,8 @@ class ChatActivity : AppCompatActivity() {
         })
 
         binding.sendChat.setOnClickListener{
-            val message = messageBox.text.toString()
-            val messageObject = Message(message, FirebaseAuth.getInstance().currentUser?.uid)
 
-            database = FirebaseDatabase.getInstance("https://adopt-a-pet-f6709-default-rtdb.europe-west1.firebasedatabase.app/").getReference()
-            println(database)
-            database.child("chats").child(senderRoom!!).child("messages").push().setValue(messageObject).addOnSuccessListener {
-                database.child("chats").child(receiverRoom!!).child("messages").push().setValue(messageObject)
-            }
-            messageBox.setText("")
-
+            sendMessage()
 
         }
 
@@ -117,6 +125,25 @@ class ChatActivity : AppCompatActivity() {
         }
         super.onBackPressed();
     }
+
+    fun sendMessage(){
+        val message = messageBox.text.toString()
+
+        if (!message.equals("")) {
+            val messageObject = Message(message, FirebaseAuth.getInstance().currentUser?.uid)
+
+            database =
+                FirebaseDatabase.getInstance("https://adopt-a-pet-f6709-default-rtdb.europe-west1.firebasedatabase.app/")
+                    .getReference()
+            database.child("chats").child(senderRoom!!).child("messages").push()
+                .setValue(messageObject).addOnSuccessListener {
+                database.child("chats").child(receiverRoom!!).child("messages").push()
+                    .setValue(messageObject)
+            }
+            messageBox.setText("")
+        }
+    }
+
 
 
 }

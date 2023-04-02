@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +14,7 @@ import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.adapters.HomeReyclerAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.FragmentHomeBinding
 import com.yasinenessisik.adopt_a_pet.model.Post
+import java.security.Timestamp
 
 class HomeFragment : Fragment() {
 
@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
 
     }
     fun getData(){
-        database.collection("Post").orderBy("tarih", Query.Direction.DESCENDING).addSnapshotListener { snapshot, exception ->
+        database.collection("Post").orderBy("date", Query.Direction.DESCENDING).addSnapshotListener { snapshot, exception ->
             if (exception != null) {
                 Toast.makeText(activity,exception.localizedMessage, Toast.LENGTH_LONG).show()
             } else {
@@ -67,22 +67,40 @@ class HomeFragment : Fragment() {
                         postList.clear()
 
                         for (document in documents) {
+
                             val imageUrl = document.get("imageurl") as String
-                            val userMail = document.get("usermail") as String
-                            val pet = document.get("pet") as String
-                            val petRace = document.get("petRace") as String
+                            val usermail = document.get("usermail") as String
+                            val useruid = document.get("useruid") as String
+                            val petname = document.get("petname") as String
+                            val petspecies = document.get("petspecies") as String
+                            val petbreed = document.get("petbreed") as String
+                            val petage = document.get("petage") as String
+                            val petcity = document.get("petcity") as String
+                            val petdistrict = document.get("petdistrict") as String
+                            val petgender = document.get("petgender") as String
+                            val petexplanation = document.get("petexplanation") as String
+                            val peturgency = document.get("peturgency") as Long
                             val docId = document.id
+
+
                             val indirilenPost =
                                 Post(
                                     imageUrl,
-                                    userMail,
-                                    pet,
-                                    petRace,
+                                    usermail,
+                                    useruid,
+                                    petname,
+                                    petspecies,
+                                    petbreed,
+                                    petage,
+                                    petcity,
+                                    petdistrict,
+                                    petgender,
+                                    petexplanation,
+                                    peturgency,
                                     docId
 
                                 )
                             postList.add(indirilenPost)
-                            println(docId)
 
                         }
                         recyclerViewAdapter.notifyDataSetChanged()

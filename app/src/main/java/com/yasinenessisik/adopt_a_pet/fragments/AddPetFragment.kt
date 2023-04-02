@@ -9,12 +9,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.MediaStore.Audio.Radio
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -32,8 +35,8 @@ class AddPetFragment : Fragment() {
     private lateinit var storage: FirebaseStorage
     private lateinit var database: FirebaseFirestore
 
-
     private lateinit var binding: FragmentAddPetBinding
+
 
 
 
@@ -148,22 +151,66 @@ class AddPetFragment : Fragment() {
             imageReference.putFile(pickedImage!!).addOnSuccessListener { taskSnapshot ->
                 val uploadedImageReference = FirebaseStorage.getInstance().reference.child("images").child(imageName)
                 uploadedImageReference.downloadUrl.addOnSuccessListener { uri ->
+
+                    // imagein urlsini aliyorsuz
                     val downloadUrl = uri.toString()
+
+                    //yukleyen kullanicilarin bilgileri
                     val userMail = auth.currentUser!!.email.toString()
-                    val pet = binding.pet.text.toString()
-                    val petRace = binding.petRace.text.toString()
-                    val tarih = com.google.firebase.Timestamp.now()
+                    val userUid = auth.currentUser!!.uid
+
+                    //siralama icin
+                    val Date = com.google.firebase.Timestamp.now()
+
+                    //layout idleri degiskenlere atiyoruz databasede tutmak icin
+
+                    val petName = binding.petName.text.toString()
+                    val petSpecies = binding.petSpecies.text.toString()
+                    val petBreed = binding.petBreed.text.toString()
+                    val petAge = binding.petAge.text.toString()
+                    val petCity = binding.petCity.text.toString()
+                    val petDistrict = binding.petDistrict.text.toString()
+                    val petExplanation = binding.petExplanation.text.toString()
+
+
+                    var petGender ="Male"
+                    if(binding.radioF.isChecked){
+                        petGender = "Female"
+                    }
+
+
+                    var petUrgency = 0
+                    if (binding.petUrgency.isChecked){
+                        petUrgency = 1
+                    }
+
+
+
+
 
 
                     //veritabanı işlemlerini
 
-                    println("basarili")
+
                     val postHashMap = hashMapOf<String, Any>()
+
                     postHashMap.put("imageurl",downloadUrl)
+
                     postHashMap.put("usermail",userMail)
-                    postHashMap.put("pet",pet)
-                    postHashMap.put("petRace",petRace)
-                    postHashMap.put("tarih",tarih)
+                    postHashMap.put("useruid",userUid)
+
+                    postHashMap.put("date",Date)
+
+                    postHashMap.put("petname",petName)
+                    postHashMap.put("petspecies",petSpecies)
+                    postHashMap.put("petbreed",petBreed)
+                    postHashMap.put("petage",petAge)
+                    postHashMap.put("petcity",petCity)
+                    postHashMap.put("petdistrict",petDistrict)
+                    postHashMap.put("petgender",petGender)
+                    postHashMap.put("petexplanation",petExplanation)
+                    postHashMap.put("peturgency",petUrgency)
+
 
 
                     database.collection("Post").add(postHashMap).addOnCompleteListener { task ->
@@ -201,6 +248,5 @@ class AddPetFragment : Fragment() {
         }
         return Bitmap.createScaledBitmap(bitmap,width,height,true)
     }
-
 
 }

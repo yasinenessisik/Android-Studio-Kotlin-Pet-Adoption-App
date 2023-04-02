@@ -76,23 +76,12 @@
         <argument
             android:name="camefromhome"
             app:argType="string" />
-        <argument
-            android:name="postid"
-            app:argType="string" />
-        <argument
-            android:name="imageurl"
-            app:argType="string" />
-        <argument android:name="petrace"
-            app:argType="string" />
-        <argument
-            android:name="pet"
-            app:argType="string" />
-        <argument
-            android:name="usermail"
-            app:argType="string" />
         <action
             android:id="@+id/action_petInfoFragment_to_myHomeFragment"
             app:destination="@id/myHomeFragment" />
+        <argument
+            android:name="Post"
+            app:argType="com.yasinenessisik.adopt_a_pet.model.Post" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"

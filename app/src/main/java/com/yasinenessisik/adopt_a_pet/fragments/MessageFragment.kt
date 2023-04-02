@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.adapters.MessageAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.FragmentMessageBinding
@@ -22,7 +23,7 @@ class MessageFragment : Fragment() {
     private lateinit var recyclerViewAdapter: MessageAdapter
 
     var userlist = ArrayList<User>()
-
+    var connectedUserList = ArrayList<User>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,24 +55,52 @@ class MessageFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userlist.clear()
                 for (postSnapshot in snapshot.children){
-
                     val currentUser = postSnapshot.getValue(User::class.java)
                     if(auth.currentUser?.uid != currentUser?.uid){
-                        userlist.add(currentUser!!)
+
+
+
+
+                            database.child("chats").addValueEventListener(object :ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    var room =auth.currentUser?.uid+""+currentUser?.uid
+                                        var room1=currentUser?.uid+""+auth.currentUser?.uid
+                                    for (postSnapshot in snapshot.children) {
+                                        if (!userlist.contains(currentUser)) {
+                                            if (room.equals(postSnapshot.key)) {
+                                                userlist.add(currentUser!!)
+                                            } else if (room1.equals(postSnapshot.key)) {
+                                                userlist.add(currentUser!!)
+                                            }
+                                        }
+                                    }
+                                    recyclerViewAdapter.notifyDataSetChanged()
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+
+
+                                }
+
+
+                            })
+
+
+
+
+
                     }
 
-
-
                 }
-                recyclerViewAdapter.notifyDataSetChanged()
+
             }
 
             override fun onCancelled(error: DatabaseError) {
-
-
             }
 
         })
+
+
     }
 
 }
