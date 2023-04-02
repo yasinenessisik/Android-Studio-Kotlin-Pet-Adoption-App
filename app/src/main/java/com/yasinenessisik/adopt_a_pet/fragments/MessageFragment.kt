@@ -1,9 +1,11 @@
 package com.yasinenessisik.adopt_a_pet.fragments
 
 import android.annotation.SuppressLint
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
