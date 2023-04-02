@@ -14,7 +14,18 @@ import androidx.core.content.ContextCompat
 
 
 class SearchFragment : Fragment() {
-
+    lateinit var img_dog:ImageView;
+    lateinit var img_cat:ImageView;
+    lateinit var img_rabbit:ImageView;
+    lateinit var img_fish:ImageView;
+    lateinit var img_bird:ImageView;
+    lateinit var img_other:ImageView;
+    var dog_selected =false
+    var cat_selected =false
+    var fish_selected=false
+    var rabbit_selected=false
+    var bird_selected=false
+    var other_selected=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -26,128 +37,296 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         var rootView: View
         rootView=inflater.inflate(R.layout.fragment_search, container, false);
-        var dog_selected =false
-        var cat_selected =false
-        var fish_selected=false
-        var rabbit_selected=false
-        var bird_selected=false
-        var other_selected=false
 
-        var img_dog=rootView.findViewById<ImageView>(R.id.img_dog)
+
+        img_dog=rootView.findViewById<ImageView>(R.id.img_dog)
 
         img_dog.setOnClickListener(View.OnClickListener {
-            dog_selected=changeVisibility(0,img_dog,dog_selected)
+            changeVisibility(0)
 
         })
-        var img_cat=rootView.findViewById<ImageView>(R.id.img_cat)
+        img_cat=rootView.findViewById<ImageView>(R.id.img_cat)
         img_cat.setOnClickListener(View.OnClickListener {
+            changeVisibility(1)
 
-            cat_selected=changeVisibility(1,img_cat,cat_selected)
 
         })
-        var img_rabbit=rootView.findViewById<ImageView>(R.id.img_rabbit)
+        img_rabbit=rootView.findViewById<ImageView>(R.id.img_rabbit)
         img_rabbit.setOnClickListener(View.OnClickListener {
 
-            rabbit_selected=changeVisibility(2,img_rabbit,rabbit_selected)
+            changeVisibility(2)
 
         })
-        var img_fish=rootView.findViewById<ImageView>(R.id.img_fish)
+        img_fish=rootView.findViewById<ImageView>(R.id.img_fish)
         img_fish.setOnClickListener(View.OnClickListener {
-            fish_selected=changeVisibility(3,img_fish,fish_selected)
+            changeVisibility(3)
 
         })
 
-        var img_bird=rootView.findViewById<ImageView>(R.id.img_bird)
+        img_bird=rootView.findViewById<ImageView>(R.id.img_bird)
         img_bird.setOnClickListener(View.OnClickListener {
+            changeVisibility(4)
 
-            bird_selected=changeVisibility(4,img_bird,bird_selected)
 
         })
-        var img_other=rootView.findViewById<ImageView>(R.id.img_other)
+        img_other=rootView.findViewById<ImageView>(R.id.img_other)
         img_other.setOnClickListener(View.OnClickListener {
 
-            other_selected=changeVisibility(5,img_other,other_selected)
+            changeVisibility(5)
 
         })
         return rootView;
     }
 
-    private fun changeVisibility(id:Int,mainImg:ImageView,selected:Boolean): Boolean {
+    private fun changeVisibility(id:Int) {
         if(id==0){
             //for dog
-            if(selected){
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
-                mainImg.setImageResource(R.drawable.dog)
+            if(dog_selected){
+                img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                img_dog.setImageResource(R.drawable.dog)
+                dog_selected=false
+
+
             }
             else{
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
-                mainImg.setImageResource(R.drawable.white_dog)
+                img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
+                img_dog.setImageResource(R.drawable.white_dog)
+                if (cat_selected){
+                    img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_cat.setImageResource(R.drawable.cat)
+                    cat_selected=false
+                }
+                if (rabbit_selected){
+                    img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_rabbit.setImageResource(R.drawable.rabbit)
+                    rabbit_selected=false
+                }
+                if (fish_selected){
+                    img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_fish.setImageResource(R.drawable.fish)
+                    fish_selected=false
+                }
+                if (bird_selected){
+                    img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_bird.setImageResource(R.drawable.bird)
+                    bird_selected=false
+                }
+                if (other_selected){
+                    img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_other.setImageResource(R.drawable.other)
+                    other_selected=false
+                }
+                dog_selected=true
             }
 
         }
         else if(id==1){
             //for cat
-            if(selected){
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
-                mainImg.setImageResource(R.drawable.cat)
+            if(cat_selected){
+                img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                img_cat.setImageResource(R.drawable.cat)
+                cat_selected=false
+
+
             }
             else{
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
-                mainImg.setImageResource(R.drawable.white_cat)
+                img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
+                img_cat.setImageResource(R.drawable.white_cat)
+                if (dog_selected){
+                    img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_dog.setImageResource(R.drawable.dog)
+                    dog_selected=false
+                }
+                if (rabbit_selected){
+                    img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_rabbit.setImageResource(R.drawable.rabbit)
+                    rabbit_selected=false
+                }
+                if (fish_selected){
+                    img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_fish.setImageResource(R.drawable.fish)
+                    fish_selected=false
+                }
+                if (bird_selected){
+                    img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_bird.setImageResource(R.drawable.bird)
+                    bird_selected=false
+                }
+                if (other_selected){
+                    img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_other.setImageResource(R.drawable.other)
+                    other_selected=false
+                }
+                cat_selected=true
             }
 
         }
-        else if(id==2){
+        else if(id==2){//for rabbit
             //for rabbit
-            if(selected){
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
-                mainImg.setImageResource(R.drawable.rabbit)
+            if(rabbit_selected){
+                img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                img_rabbit.setImageResource(R.drawable.rabbit)
+                rabbit_selected=false
+
             }
             else{
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
-                mainImg.setImageResource(R.drawable.white_rabbit)
+                img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
+                img_rabbit.setImageResource(R.drawable.white_rabbit)
+                if (cat_selected){
+                    img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_cat.setImageResource(R.drawable.cat)
+                    cat_selected=false
+                }
+                if (dog_selected){
+                    img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_dog.setImageResource(R.drawable.dog)
+                    dog_selected=false
+                }
+                if (fish_selected){
+                    img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_fish.setImageResource(R.drawable.fish)
+                    fish_selected=false
+                }
+                if (bird_selected){
+                    img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_bird.setImageResource(R.drawable.bird)
+                    bird_selected=false
+                }
+                if (other_selected){
+                    img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_other.setImageResource(R.drawable.other)
+                    other_selected=false
+                }
+
+                rabbit_selected=true
             }
 
         }
         else if (id==3){
             //for fish
-            if(selected){
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
-                mainImg.setImageResource(R.drawable.fish)
+            if(fish_selected){
+                img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                img_fish.setImageResource(R.drawable.fish)
+                fish_selected=false
+
             }
             else{
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
-                mainImg.setImageResource(R.drawable.white_fish)
+                img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
+                img_fish.setImageResource(R.drawable.white_fish)
+                if (cat_selected){
+                    img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_cat.setImageResource(R.drawable.cat)
+                    cat_selected=false
+                }
+                if (rabbit_selected){
+                    img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_rabbit.setImageResource(R.drawable.rabbit)
+                    rabbit_selected=false
+                }
+                if (dog_selected){
+                    img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_dog.setImageResource(R.drawable.dog)
+                    dog_selected=false
+                }
+                if (bird_selected){
+                    img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_bird.setImageResource(R.drawable.bird)
+                    bird_selected=false
+                }
+                if (other_selected){
+                    img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_other.setImageResource(R.drawable.other)
+                    other_selected=false
+                }
+
+                fish_selected=true
             }
 
         }
         else if (id==4){
             //for bird
-            if(selected){
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
-                mainImg.setImageResource(R.drawable.bird)
+            if(bird_selected){
+                img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                img_bird.setImageResource(R.drawable.bird)
+                bird_selected=false
+
             }
             else{
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
-                mainImg.setImageResource(R.drawable.white_bird)
+                img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
+                img_bird.setImageResource(R.drawable.white_bird)
+                if (cat_selected){
+                    img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_cat.setImageResource(R.drawable.cat)
+                    cat_selected=false
+                }
+                if (rabbit_selected){
+                    img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_rabbit.setImageResource(R.drawable.rabbit)
+                    rabbit_selected=false
+                }
+                if (fish_selected){
+                    img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_fish.setImageResource(R.drawable.fish)
+                    fish_selected=false
+                }
+                if (dog_selected){
+                    img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_dog.setImageResource(R.drawable.dog)
+                    bird_selected=false
+                }
+                if (other_selected){
+                    img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_other.setImageResource(R.drawable.other)
+                    other_selected=false
+                }
+
+                bird_selected=true
             }
 
         }
         else {
             //for other
-            if(selected){
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
-                mainImg.setImageResource(R.drawable.other)
+            if(other_selected){
+                img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                img_other.setImageResource(R.drawable.other)
+                other_selected=false
+
             }
             else{
-                mainImg.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
-                mainImg.setImageResource(R.drawable.white_other)
+                img_other.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_selected_image)
+                img_other.setImageResource(R.drawable.white_other)
+                if (cat_selected){
+                    img_cat.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_cat.setImageResource(R.drawable.cat)
+                    cat_selected=false
+                }
+                if (rabbit_selected){
+                    img_rabbit.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_rabbit.setImageResource(R.drawable.rabbit)
+                    rabbit_selected=false
+                }
+                if (fish_selected){
+                    img_fish.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_fish.setImageResource(R.drawable.fish)
+                    fish_selected=false
+                }
+                if (bird_selected){
+                    img_bird.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_bird.setImageResource(R.drawable.bird)
+                    bird_selected=false
+                }
+                if (dog_selected){
+                    img_dog.background = ContextCompat.getDrawable(requireContext(), R.drawable.background_for_image)
+                    img_dog.setImageResource(R.drawable.dog)
+                    dog_selected=false
+                }
+
+                other_selected=true
             }
 
         }
-        return !selected
-        //deneme 123
-        //mami test
+
+
     }
 
 
