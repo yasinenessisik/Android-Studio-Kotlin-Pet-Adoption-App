@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".SearchFragment">
 
     <ImageView
@@ -77,5 +79,149 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/img_fish"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sf_recyclerview"
+        android:layout_width="414dp"
+        android:layout_height="208dp"
+        android:background="@drawable/background_for_sf_recyclerview"
+        android:padding="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_non_editable" />
+
+    <ImageButton
+        android:id="@+id/sf_down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/down_arrow"
+        android:src="@drawable/down_arrow"
+        app:layout_constraintBottom_toTopOf="@+id/sf_recyclerview"
+        app:layout_constraintEnd_toStartOf="@+id/tv_non_editable"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_non_editable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="10dp"
+        android:text="Select Breed"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_fish" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_non_editable2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sf_recyclerview">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textColorHint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Does not matter"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_non_editable2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Age"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/sf_recyclerview" />
+
+    <EditText
+        android:id="@+id/sf_et_min_age"
+        android:layout_width="81dp"
+        android:layout_height="49dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="Min"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
+        app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_non_editable2" />
+
+    <EditText
+        android:id="@+id/sf_et_max_age"
+        android:layout_width="81dp"
+        android:layout_height="49dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="Max"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
+        app:layout_constraintTop_toBottomOf="@+id/sf_et_min_age" />
+
+    <EditText
+        android:id="@+id/sf_et_city"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="City"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/sf_et_district"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <EditText
+        android:id="@+id/sf_et_district"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="District"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/sf_et_city"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/sf_btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sf_et_city" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
