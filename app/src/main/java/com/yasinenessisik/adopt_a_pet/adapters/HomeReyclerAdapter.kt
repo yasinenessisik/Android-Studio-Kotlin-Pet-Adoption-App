@@ -10,7 +10,6 @@ import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.databinding.RecyclerRowBinding
 import com.yasinenessisik.adopt_a_pet.fragments.HomeFragmentDirections
 import com.yasinenessisik.adopt_a_pet.model.Post
-import kotlinx.coroutines.delay
 
 class HomeReyclerAdapter(val postList : ArrayList<Post>) : RecyclerView.Adapter<HomeReyclerAdapter.PostHolder>() {
     private lateinit var binding: RecyclerRowBinding
@@ -42,6 +41,13 @@ class HomeReyclerAdapter(val postList : ArrayList<Post>) : RecyclerView.Adapter<
             val action = HomeFragmentDirections.actionHomeFragmentToPetInfoFragment("camefromhome",postList[position])
             Navigation.findNavController(it).navigate(action)
         }
+    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
 }

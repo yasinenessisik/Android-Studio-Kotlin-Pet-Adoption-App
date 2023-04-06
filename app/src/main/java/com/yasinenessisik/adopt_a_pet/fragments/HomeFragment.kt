@@ -1,11 +1,14 @@
 package com.yasinenessisik.adopt_a_pet.fragments
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,7 +17,7 @@ import com.yasinenessisik.adopt_a_pet.R
 import com.yasinenessisik.adopt_a_pet.adapters.HomeReyclerAdapter
 import com.yasinenessisik.adopt_a_pet.databinding.FragmentHomeBinding
 import com.yasinenessisik.adopt_a_pet.model.Post
-import java.security.Timestamp
+
 
 class HomeFragment : Fragment() {
 
@@ -50,6 +53,14 @@ class HomeFragment : Fragment() {
         recyclerViewAdapter = HomeReyclerAdapter(postList)
         binding.recyclerView.layoutManager=LinearLayoutManager(context)
         binding.recyclerView.adapter = recyclerViewAdapter
+
+        val swipeRefreshLayout = binding.refreshLayout
+
+        swipeRefreshLayout.setOnRefreshListener{
+            var action = HomeFragmentDirections.actionHomeFragmentSelf()
+            Navigation.findNavController(view).navigate(action)
+            swipeRefreshLayout.isRefreshing = false
+        }
 
         getData()
 
@@ -100,8 +111,9 @@ class HomeFragment : Fragment() {
                                     docId
 
                                 )
-                            postList.add(indirilenPost)
-
+                            if(!postList.contains(indirilenPost)){
+                                postList.add(indirilenPost)
+                            }
                         }
                         recyclerViewAdapter.notifyDataSetChanged()
 
