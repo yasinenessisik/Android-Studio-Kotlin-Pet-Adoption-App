@@ -2,6 +2,7 @@ package com.yasinenessisik.adopt_a_pet.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,76 +52,195 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.bind(view)
         recyclerViewAdapter = HomeReyclerAdapter(postList)
-        binding.recyclerView.layoutManager=LinearLayoutManager(context)
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = recyclerViewAdapter
 
         val swipeRefreshLayout = binding.refreshLayout
 
-        swipeRefreshLayout.setOnRefreshListener{
+        swipeRefreshLayout.setOnRefreshListener {
             var action = HomeFragmentDirections.actionHomeFragmentSelf()
             Navigation.findNavController(view).navigate(action)
             swipeRefreshLayout.isRefreshing = false
         }
-
-        getData()
+        if (arguments?.getString("camefromsearch").equals("camefromsearch")) {
+            arguments?.getString("camefromsearch")?.let { Log.d("calisiyor", it) }
+            getFilteredData()
+        } else {
+            getData()
+        }
 
     }
-    fun getData(){
-        database.collection("Post").orderBy("date", Query.Direction.DESCENDING).addSnapshotListener { snapshot, exception ->
-            if (exception != null) {
-                Toast.makeText(activity,exception.localizedMessage, Toast.LENGTH_LONG).show()
-            } else {
-                if (snapshot != null) {
-                    if (!snapshot.isEmpty) {
 
-                        val documents = snapshot.documents
+    fun getFilteredData() {
 
-                        postList.clear()
-
-                        for (document in documents) {
-
-                            val imageUrl = document.get("imageurl") as String
-                            val usermail = document.get("usermail") as String
-                            val useruid = document.get("useruid") as String
-                            val petname = document.get("petname") as String
-                            val petspecies = document.get("petspecies") as String
-                            val petbreed = document.get("petbreed") as String
-                            val petage = document.get("petage") as String
-                            val petcity = document.get("petcity") as String
-                            val petdistrict = document.get("petdistrict") as String
-                            val petgender = document.get("petgender") as String
-                            val petexplanation = document.get("petexplanation") as String
-                            val peturgency = document.get("peturgency") as Long
-                            val docId = document.id
+        var petspeciesf = arguments?.getString("PetSpecies")
+        var petbreedf = arguments?.getString("PetBreed")
+        var petgenderf = arguments?.getString("PetGender")
+        var petagef = arguments?.getString("PetAge")
+        var petcityf = arguments?.getString("PetCity")
+        var petdistrictf = arguments?.getString("PetDistrict")
 
 
-                            val indirilenPost =
-                                Post(
-                                    imageUrl,
-                                    usermail,
-                                    useruid,
-                                    petname,
-                                    petspecies,
-                                    petbreed,
-                                    petage,
-                                    petcity,
-                                    petdistrict,
-                                    petgender,
-                                    petexplanation,
-                                    peturgency,
-                                    docId
+        if (petspeciesf != null) {
+            database.collection("Post").orderBy("date", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, exception ->
+                    if (exception != null) {
+                        Toast.makeText(activity, exception.localizedMessage, Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        if (snapshot != null) {
+                            if (!snapshot.isEmpty) {
 
-                                )
-                            if(!postList.contains(indirilenPost)){
-                                postList.add(indirilenPost)
+                                val documents = snapshot.documents
+
+                                postList.clear()
+
+                                for (document in documents) {
+
+                                    val imageUrl = document.get("imageurl") as String
+                                    val usermail = document.get("usermail") as String
+                                    val useruid = document.get("useruid") as String
+                                    val petname = document.get("petname") as String
+                                    val petspecies = document.get("petspecies") as String
+                                    val petbreed = document.get("petbreed") as String
+                                    val petage = document.get("petage") as String
+                                    val petcity = document.get("petcity") as String
+                                    val petdistrict = document.get("petdistrict") as String
+                                    val petgender = document.get("petgender") as String
+                                    val petexplanation = document.get("petexplanation") as String
+                                    val peturgency = document.get("peturgency") as Long
+                                    val docId = document.id
+
+                                    if (petspeciesf == "") {
+                                    }else if(!petspecies.equals(petspeciesf)){
+                                        continue
+                                    }
+                                    if (petbreedf == "") {
+                                    }else if(!petbreed.equals(petbreedf)){
+                                        continue
+                                    }
+                                    if (petagef == "") {
+                                    }else if(!petage.equals(petagef)){
+                                        continue
+                                    }
+                                    if (petcityf == "") {
+                                    }else if(!petcity.equals(petcityf)){
+                                        continue
+                                    }
+                                    if (petdistrictf == "") {
+                                    }else if(!petdistrict.equals(petdistrictf)){
+                                        continue
+                                    }
+
+                                    if (petgenderf == "") {
+                                    }else if(!petgender.equals(petgenderf)){
+                                        continue
+                                    }
+
+
+
+                                    val indirilenPost =
+                                        Post(
+                                            imageUrl,
+                                            usermail,
+                                            useruid,
+                                            petname,
+                                            petspecies,
+                                            petbreed,
+                                            petage,
+                                            petcity,
+                                            petdistrict,
+                                            petgender,
+                                            petexplanation,
+                                            peturgency,
+                                            docId
+
+                                        )
+                                    if (!postList.contains(indirilenPost)) {
+                                        postList.add(indirilenPost)
+                                    }
+                                }
+                                recyclerViewAdapter.notifyDataSetChanged()
+
                             }
                         }
-                        recyclerViewAdapter.notifyDataSetChanged()
+                    }
+                }
+        }
 
+    }
+
+    fun getData() {
+        database.collection("Post").orderBy("date", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, exception ->
+                if (exception != null) {
+                    Toast.makeText(activity, exception.localizedMessage, Toast.LENGTH_LONG).show()
+                } else {
+                    if (snapshot != null) {
+                        if (!snapshot.isEmpty) {
+
+                            val documents = snapshot.documents
+
+                            postList.clear()
+
+                            for (document in documents) {
+
+                                val imageUrl = document.get("imageurl") as String
+                                val usermail = document.get("usermail") as String
+                                val useruid = document.get("useruid") as String
+                                val petname = document.get("petname") as String
+                                val petspecies = document.get("petspecies") as String
+                                val petbreed = document.get("petbreed") as String
+                                val petage = document.get("petage") as String
+                                val petcity = document.get("petcity") as String
+                                val petdistrict = document.get("petdistrict") as String
+                                val petgender = document.get("petgender") as String
+                                val petexplanation = document.get("petexplanation") as String
+                                val peturgency = document.get("peturgency") as Long
+                                val docId = document.id
+
+
+                                val indirilenPost =
+                                    Post(
+                                        imageUrl,
+                                        usermail,
+                                        useruid,
+                                        petname,
+                                        petspecies,
+                                        petbreed,
+                                        petage,
+                                        petcity,
+                                        petdistrict,
+                                        petgender,
+                                        petexplanation,
+                                        peturgency,
+                                        docId
+
+                                    )
+                                if (!postList.contains(indirilenPost)) {
+                                    postList.add(indirilenPost)
+                                }
+                            }
+                            recyclerViewAdapter.notifyDataSetChanged()
+
+                        }
                     }
                 }
             }
-        }
     }
-
 }
+/*
+    whereEqualTo("petspecies", petspecies
+    )
+    .whereEqualTo("petbreed", petbreed
+    )
+    .whereEqualTo("petgender", petgender
+    )
+    .whereEqualTo("petage", petage
+    )
+    .whereEqualTo("petcity", petcity
+    )
+    .whereEqualTo("petdistrict", petdistrict
+    )
+
+*/

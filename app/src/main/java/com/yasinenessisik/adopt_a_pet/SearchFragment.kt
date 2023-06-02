@@ -150,7 +150,7 @@ class SearchFragment : Fragment() {
             return "Other"
         }
 
-        return "No option selected"
+        return ""
     }
 
     fun getSelectedBreed(): String{
@@ -203,12 +203,6 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-
-        else {
-            var data= listOf("All")
-            return "All"
-        }
-
         return ""
     }
 
