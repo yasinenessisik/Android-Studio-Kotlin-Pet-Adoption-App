@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation2"
+    app:startDestination="@id/signIn2">
+
+    <fragment
+        android:id="@+id/signIn2"
+        android:name="com.yasinenessisik.adopt_a_pet.fragments.SignIn"
+        android:label="SignIn" >
+        <action
+            android:id="@+id/action_signIn2_to_signUp2"
+            app:destination="@id/signUp2" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp2"
+        android:name="com.yasinenessisik.adopt_a_pet.fragments.SignUp"
+        android:label="SignUp" >
+        <action
+            android:id="@+id/action_signUp2_to_signIn2"
+            app:destination="@id/signIn2" />
+    </fragment>
+</navigation>

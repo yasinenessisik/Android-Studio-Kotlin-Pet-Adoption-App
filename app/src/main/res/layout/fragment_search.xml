@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
     tools:context=".SearchFragment">
-
+    <RelativeLayout
+        android:id="@+id/searchpetcap"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F1E9"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:text="Search Pet"
+            android:paddingTop="10dp"
+            android:paddingLeft="50dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/color_pink"
+            ></TextView>
+    </RelativeLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@+id/searchpetcap">
     <ImageView
         android:id="@+id/img_dog"
         android:layout_width="60dp"
@@ -159,32 +181,35 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintTop_toBottomOf="@+id/sf_recyclerview" />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_non_editable2"
+        app:layout_constraintRight_toRightOf="@+id/tv_non_editable2">
 
-    <EditText
-        android:id="@+id/sf_et_min_age"
-        android:layout_width="81dp"
-        android:layout_height="49dp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="Min"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
-        app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_non_editable2" />
+        <RadioButton
+            android:id="@+id/sf_et_min_age"
+            android:layout_width="81dp"
+            android:layout_height="49dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="Baby"
+            app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
+            app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_non_editable2" />
 
-    <EditText
+        <RadioButton
         android:id="@+id/sf_et_max_age"
         android:layout_width="81dp"
         android:layout_height="49dp"
         android:background="@null"
         android:ems="10"
-        android:hint="Max"
-        android:inputType="number"
+        android:hint="Adult"
         app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
         app:layout_constraintTop_toBottomOf="@+id/sf_et_min_age" />
-
+    </RadioGroup>
     <EditText
         android:id="@+id/sf_et_city"
         android:layout_width="133dp"
@@ -213,7 +238,7 @@
         app:layout_constraintStart_toEndOf="@+id/sf_et_city"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sf_btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -221,7 +246,8 @@
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sf_et_city" />
-
+        app:layout_constraintTop_toBottomOf="@+id/sf_et_city"
+        android:background="@drawable/shape_login_button"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

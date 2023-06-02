@@ -6,6 +6,7 @@ import android.graphics.PorterDuff
 import android.media.Image
 import android.opengl.Visibility
 import android.os.Bundle
+import android.text.Layout.Directions
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,9 +16,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yasinenessisik.adopt_a_pet.adapters.HomeReyclerAdapter
+import com.yasinenessisik.adopt_a_pet.databinding.FragmentAddPetBinding
+import com.yasinenessisik.adopt_a_pet.databinding.FragmentSearchBinding
+import com.yasinenessisik.adopt_a_pet.fragments.HomeFragmentDirections
 
 
 class SearchFragment : Fragment() {
@@ -38,7 +43,7 @@ class SearchFragment : Fragment() {
     lateinit var img_down_arrow:ImageButton
     var is_recyclerVisible=false
     private lateinit var recyclerViewAdapter: SearchFragmentAdapter
-
+    private lateinit var binding: FragmentSearchBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -49,7 +54,7 @@ class SearchFragment : Fragment() {
     ): View? {
         var rootView: View
         rootView=inflater.inflate(R.layout.fragment_search, container, false);
-
+        binding = FragmentSearchBinding.bind(rootView)
         val items = listOf("")
         recyclerViewAdapter = SearchFragmentAdapter(items)
         recyclerView=rootView.findViewById(R.id.sf_recyclerview)
@@ -106,7 +111,105 @@ class SearchFragment : Fragment() {
 
         })
 
+
+        binding.sfBtnSubmit.setOnClickListener {
+            var petGender =""
+            if(binding.radioButton.isChecked){
+                petGender = "Male"
+            }else if(binding.radioButton2.isChecked){
+                petGender = "Female"
+            }else if(binding.radioButton3.isChecked){
+                petGender = "Does not matter"
+            }
+            var petAge = ""
+            if(binding.sfEtMinAge.isChecked){
+                petAge = "Bayb"
+            }else if(binding.sfEtMaxAge.isChecked){
+                petAge = "Adult"
+            }
+            var action = SearchFragmentDirections.actionSearchFragmentToHomeFragment("camefromsearch",getSelectedSpecies(),getSelectedBreed(),petGender,petAge,binding.sfEtCity.text.toString(),binding.sfEtDistrict.text.toString())
+            Log.d("Sended Request", "Species: ${getSelectedSpecies()}, Breed: ${getSelectedBreed()}, Gender: ${petGender}, Age: ${petAge}, City: ${binding.sfEtCity.text.toString()}, District: ${binding.sfEtDistrict.text.toString()}")
+            Navigation.findNavController(it).navigate(action)
+        }
+
         return rootView;
+    }
+    fun getSelectedSpecies(): String {
+
+        if (dog_selected) {
+            return "Dog"
+        } else if (cat_selected) {
+            return "Cat"
+        } else if (fish_selected) {
+            return "Fish"
+        } else if (rabbit_selected) {
+            return "Rabbit"
+        } else if (bird_selected) {
+            return "Bird"
+        } else if (other_selected) {
+            return "Other"
+        }
+
+        return "No option selected"
+    }
+
+    fun getSelectedBreed(): String{
+        var booleanArray = recyclerViewAdapter.getCheckedItems()
+        Log.d("mymessage", "setRecyclerData: index is $id")
+        if(dog_selected){
+            var data= listOf("Kangal","Anadolu Çoban Köpeği","Pitbull","Rotweiller","Dogo argentino","Husskel")
+            for (i in booleanArray.indices) {
+                if (booleanArray[i]) {
+                    Log.d("Animal Breed","Selected option: ${data[i]}, Index: $i")
+                    println()
+                    return data[i];
+                }
+            }
+
+        }
+        else if(cat_selected){
+            var data= listOf("Sokak Kedisi","Ragdoll","Exotic","Persian","British Shorthair","Devon Rex")
+            for (i in booleanArray.indices) {
+                if (booleanArray[i]) {
+                    Log.d("Animal Breed","Selected option: ${data[i]}, Index: $i")
+                    return data[i];
+                }
+            }
+        }
+        else if(rabbit_selected){
+            var data= listOf("Cüce","Angora","Beveren","Havana","Himalaya","Argente")
+            for (i in booleanArray.indices) {
+                if (booleanArray[i]) {
+                    Log.d("Animal Breed","Selected option: ${data[i]}, Index: $i")
+                    return data[i];
+                }
+            }
+        }
+        else if(fish_selected){
+            var data= listOf("Beta","Barbus","Zebra Balığı","Ancistrus","Siyah Tetra","Moli","Lepistesler")
+            for (i in booleanArray.indices) {
+                if (booleanArray[i]) {
+                    Log.d("Animal Breed","Selected option: ${data[i]}, Index: $i")
+                    return data[i];
+                }
+            }
+        }
+        else if(bird_selected){
+            var data= listOf("Muhabbet Kuşu","Kanarya","Saka","Paraket","Papağan","Bülbül")
+            for (i in booleanArray.indices) {
+                if (booleanArray[i]) {
+                    Log.d("Animal Breed","Selected option: ${data[i]}, Index: $i")
+                    return data[i];
+                }
+            }
+        }
+
+        else {
+            var data= listOf("All")
+            return "All"
+        }
+
+        return ""
     }
 
     private fun changeVisibility(id:Int) {

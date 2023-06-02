@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="urgent">#E3CACA</color>
+    <color name="color_pink">#61481C</color>
+    <color name="color_violet">#A47E3B</color>
+    <color name="color_blue">#E6B325</color>
+    <color name="color_green_light">#61481C</color>
+    <color name="transparent">#6B7171</color>
+    <color name="gray">#3E3C3C</color>
 </resources>

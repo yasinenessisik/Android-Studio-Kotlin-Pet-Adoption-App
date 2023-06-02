@@ -26,13 +26,63 @@
             app:destination="@id/petInfoFragment" />
         <action
             android:id="@+id/action_homeFragment_self"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment" >
+            <argument
+                android:name="camefromsearch"
+                android:defaultValue="a" />
+            <argument
+                android:name="PetSpecies"
+                android:defaultValue="a" />
+            <argument
+                android:name="PetBreed"
+                android:defaultValue="a" />
+            <argument
+                android:name="PetGender"
+                android:defaultValue="a" />
+            <argument
+                android:name="PetAge"
+                android:defaultValue="a" />
+            <argument
+                android:name="PetCity"
+                android:defaultValue="a" />
+            <argument
+                android:name="PetDistrict"
+                android:defaultValue="a" />
+        </action>
+        <argument
+            android:name="camefromsearch"
+            app:argType="string"
+            android:defaultValue="a" />
+        <argument
+            android:name="PetSpecies"
+            app:argType="string"
+            android:defaultValue="a" />
+        <argument android:name="PetBreed"
+            app:argType="string"
+            android:defaultValue="a" />
+        <argument android:name="PetGender"
+            app:argType="string"
+            android:defaultValue="a" />
+        <argument android:name="PetAge"
+            app:argType="string"
+            android:defaultValue="a" />
+        <argument android:name="PetCity"
+            app:argType="string"
+            android:defaultValue="a" />
+        <argument
+            android:name="PetDistrict"
+            app:argType="string"
+            android:defaultValue="a" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.yasinenessisik.adopt_a_pet.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addPetFragment"
         android:name="com.yasinenessisik.adopt_a_pet.fragments.AddPetFragment"

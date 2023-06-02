@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,11 +8,25 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddPetFragment"
     android:orientation="vertical"
-    android:layout_margin="5dp"
     android:gravity="top"
-
     >
-
+    <RelativeLayout
+        android:id="@+id/addpetcap"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F1E9"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:text="Add Pet"
+            android:paddingTop="10dp"
+            android:paddingLeft="50dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/color_pink"
+            ></TextView>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,133 +35,248 @@
         android:layout_marginTop="15dp"
         android:onClick="pickImage"
         android:src="@drawable/gorsel"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addpetcap"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints"></ImageView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        tools:ignore="MissingConstraints">
+    <ImageView
+        android:id="@+id/img_dog"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_for_image"
+        android:src="@drawable/dog"
+        app:layout_constraintEnd_toStartOf="@+id/img_cat"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/pet_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Pet Name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    <ImageView
+        android:id="@+id/img_cat"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_for_image"
+        android:src="@drawable/cat"
+        app:layout_constraintEnd_toStartOf="@+id/img_rabbit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_dog"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/pet_species"
+    <ImageView
+        android:id="@+id/img_rabbit"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_for_image"
+        android:src="@drawable/rabbit"
+        app:layout_constraintEnd_toStartOf="@+id/img_fish"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_cat"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_fish"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_for_image"
+        android:src="@drawable/fish"
+        app:layout_constraintEnd_toStartOf="@+id/img_bird"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_rabbit"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_other"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_for_image"
+        android:src="@drawable/other"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_bird"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_bird"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_for_image"
+        android:src="@drawable/bird"
+        app:layout_constraintEnd_toStartOf="@+id/img_other"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_fish"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sf_recyclerview"
+        android:layout_width="414dp"
+        android:layout_height="160dp"
+        android:background="@drawable/background_for_sf_recyclerview"
+        android:padding="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_non_editable" />
+
+    <ImageButton
+        android:id="@+id/sf_down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/down_arrow"
+        android:src="@drawable/down_arrow"
+        app:layout_constraintBottom_toTopOf="@+id/sf_recyclerview"
+        app:layout_constraintEnd_toStartOf="@+id/tv_non_editable"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_non_editable"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:padding="10dp"
+        android:text="Select Breed"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_fish" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Pet Species"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_non_editable2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pet" />
-    <EditText
-        android:id="@+id/pet_breed"
+        app:layout_constraintTop_toBottomOf="@+id/sf_recyclerview">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Male"
+            android:textColorHint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Female"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Does not matter"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_non_editable2"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:padding="10dp"
+        android:text="Age"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/sf_recyclerview" />
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Pet Breed"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_non_editable2"
+        app:layout_constraintRight_toRightOf="@+id/tv_non_editable2">
+        <RadioButton
+            android:id="@+id/sf_et_min_age"
+            android:layout_width="81dp"
+            android:layout_height="20dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="Baby"
+            app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
+            app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_non_editable2" />
+
+        <RadioButton
+            android:id="@+id/sf_et_max_age"
+            android:layout_width="81dp"
+            android:layout_height="20dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="Adult"
+            app:layout_constraintEnd_toEndOf="@+id/tv_non_editable2"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="@+id/tv_non_editable2"
+            app:layout_constraintTop_toBottomOf="@+id/sf_et_min_age" />
+    </RadioGroup>
     <EditText
-        android:id="@+id/pet_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Pet Age"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-    <EditText
-        android:id="@+id/pet_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/sf_et_city"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="City"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sf_et_district"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
     <EditText
-        android:id="@+id/pet_district"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/sf_et_district"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="District"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-    <RadioGroup
-        android:id="@+id/radioGrp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/sf_et_city"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        <EditText
+            android:id="@+id/sf_et_explanation"
+            android:layout_width="133dp"
+            android:layout_height="50dp"
+            android:hint="Explanation"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@+id/sf_et_district"
+            app:layout_constraintStart_toStartOf="@+id/sf_et_district"
+            ></EditText>
+        <EditText
+            android:id="@+id/sf_et_name"
+            android:layout_width="133dp"
+            android:layout_height="50dp"
+            android:hint="Pet Name"
+            android:inputType="textShortMessage"
+            app:layout_constraintTop_toBottomOf="@+id/sf_et_city"
+            app:layout_constraintStart_toStartOf="@+id/sf_et_city">
 
-        >
-        <RadioButton
-            android:id="@+id/radioM"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:checked="true"
-            android:layout_weight="1"
-            android:textSize="14dp"
-            android:text="Male"
-
-            />
-        <RadioButton
-            android:id="@+id/radioF"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:checked="false"
-            android:layout_weight="1"
-            android:textSize="14dp"
-            android:text="Female"
-            />
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/pet_explanation"
+        </EditText>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sf_btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Explanation"
-        android:inputType="textPersonName"
+        android:layout_marginTop="10dp"
+        android:text="Send"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-    <CheckBox
-        android:id="@+id/pet_urgency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Urgent"
-        ></CheckBox>
-
-    <Button
-        android:id="@+id/pet_send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Share Pet"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/sf_et_explanation"
+        android:background="@drawable/shape_login_button"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

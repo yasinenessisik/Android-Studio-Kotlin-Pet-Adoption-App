@@ -30,9 +30,12 @@ class HomeReyclerAdapter(val postList : ArrayList<Post>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        binding.petName.text = postList[position].petspecies
+        binding.petName.text = postList[position].petname
+        binding.petSpecies.text = postList[position].petspecies
         binding.petBreed.text = postList[position].petbreed
         binding.userMail.text = postList[position].usermail
+        binding.petCity.text = postList[position].petcity
+        binding.petDistrict.text = postList[position].petdistrict
         Picasso.get().load(postList[position].imageurl).into(binding.petImage)
         if(postList[position].peturgency?.toInt() == 1) {
             binding.background.setBackgroundResource(R.color.urgent)

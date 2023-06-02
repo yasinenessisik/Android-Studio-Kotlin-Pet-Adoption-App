@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.MessageFragment">
-
+    <RelativeLayout
+        android:id="@+id/messagecap"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F1E9"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:text="Messages"
+            android:paddingTop="10dp"
+            android:paddingLeft="50dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/color_pink"
+            tools:ignore="MissingConstraints"></TextView>
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/messagecap">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/recycler_row_message" />
-</FrameLayout>
+        tools:listitem="@layout/recycler_row_message"
+        />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

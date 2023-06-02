@@ -55,16 +55,15 @@ class PetInfoFragment : Fragment() {
 
                 Picasso.get().load(postobje.imageurl).into(binding.imageView3)
 
-                binding.petName.text = postobje.petbreed
+                binding.petName.text = postobje.petname
                 binding.petBreed.text = postobje.petbreed
-                binding.petSpecies.text = postobje.petbreed
+                binding.petSpecies.text = postobje.petspecies
                 binding.petAge.text = postobje.petage
                 binding.petCity.text = postobje.petcity
                 binding.petDistrict.text = postobje.petdistrict
                 binding.petGender.text = postobje.petgender
                 binding.petExplanation.text = postobje.petexplanation
                 binding.petUrgency.text = postobje.peturgency.toString()
-
 
 
 
