@@ -229,18 +229,4 @@ class HomeFragment : Fragment() {
             }
     }
 }
-/*
-    whereEqualTo("petspecies", petspecies
-    )
-    .whereEqualTo("petbreed", petbreed
-    )
-    .whereEqualTo("petgender", petgender
-    )
-    .whereEqualTo("petage", petage
-    )
-    .whereEqualTo("petcity", petcity
-    )
-    .whereEqualTo("petdistrict", petdistrict
-    )
 
-*/

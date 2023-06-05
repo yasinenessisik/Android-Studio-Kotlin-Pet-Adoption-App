@@ -137,7 +137,6 @@ class MyHomeFragment : Fragment() {
 
                                 )
                             postList.add(indirilenPost)
-                            println(postList)
 
                         }
                         recyclerViewAdapter.notifyDataSetChanged()

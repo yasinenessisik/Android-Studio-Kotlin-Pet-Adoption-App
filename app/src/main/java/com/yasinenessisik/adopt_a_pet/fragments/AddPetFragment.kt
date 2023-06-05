@@ -806,6 +806,15 @@ class AddPetFragment : Fragment() {
         img_down_arrow.setBackgroundResource(R.drawable.down_arrow)
         is_recyclerVisible=false
     }
+    fun resizeBitmapT(width : Int, height : Int): Boolean {
+        val maximumBoyut = 300
+        var width = width
+        var height = height
+        val bitmapOrani : Double = width.toDouble() / height.toDouble()
+        return bitmapOrani > 1
+
+    }
+
 
 
 }
