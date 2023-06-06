@@ -2,7 +2,7 @@
 Project Title
 Pet Adoption App
 
-![](https://github.com/yasinenessisik/Adopt-a-Pet/blob/master/app/programgif.gif=800x500))
+![](https://github.com/yasinenessisik/Adopt-a-Pet/blob/master/app/programgif.gif=800x500)
 
 
 Project Description
