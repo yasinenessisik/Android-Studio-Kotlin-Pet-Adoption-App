@@ -2,7 +2,7 @@
 Project Title
 Pet Adoption App
 
-![](https://github.com/yasinenessisik/Adopt-a-Pet/blob/master/app/programgif.gif)
+![](https://github.com/yasinenessisik/Adopt-a-Pet/blob/master/app/programgif.gif=600x300)))
 
 Project Description
 This is an Android app that allows users to search for pets available for adoption in their area. The app uses Firebase as a backend to store and retrieve data about the pets, including their photos, descriptions, and adoption information.
