@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Adopt-a-Pet</title>
-</head>
 <body>
   <h1>Adopt-a-Pet</h1>
   
