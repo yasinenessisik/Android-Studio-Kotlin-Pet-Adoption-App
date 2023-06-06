@@ -46,7 +46,7 @@ tools:context=".MainActivity">
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/gorsel"
         />
     <EditText
         android:id="@+id/nick_name"

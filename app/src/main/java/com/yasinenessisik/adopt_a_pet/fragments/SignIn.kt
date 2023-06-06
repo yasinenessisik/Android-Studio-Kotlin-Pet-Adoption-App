@@ -52,8 +52,10 @@ class SignIn : Fragment() {
             var action = SignInDirections.actionSignIn2ToSignUp2()
             Navigation.findNavController(view).navigate(action)
         }
+
         binding.signIn.setOnClickListener {
-            signIn(it)
+                signIn(it)
+
         }
         binding.forgotPassword.setOnClickListener{
             resetPassword(it)
@@ -71,32 +73,47 @@ class SignIn : Fragment() {
         var userMail = binding.loginEmailText.text.toString()
         var userPassword = binding.loginPasswordText.text.toString()
 
+        if (userMail.isEmpty() && userPassword.isEmpty()) {
+            Toast.makeText(activity, "Enter a valid email and password.", Toast.LENGTH_LONG)
+                .show()
+        }else {
 
-        activity?.let {
-            auth.signInWithEmailAndPassword(userMail, userPassword)
-                .addOnCompleteListener(it) { task ->
+            activity?.let {
+                auth.signInWithEmailAndPassword(userMail, userPassword)
+                    .addOnCompleteListener(it) { task ->
 
-                    if (task.isSuccessful) {
-                        val verification = auth.currentUser?.isEmailVerified
-                        if (verification==true){
-                            val user = auth.currentUser
-                            Toast.makeText(activity,"Hosgeldin ${user?.email.toString()}", Toast.LENGTH_LONG).show()
-                            var intent = Intent(activity, NavigationBarActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
-                        }else{
-                            Toast.makeText(context,"Please verify your email.",Toast.LENGTH_LONG).show()
+                        if (task.isSuccessful) {
+                            val verification = auth.currentUser?.isEmailVerified
+                            if (verification == true) {
+                                val user = auth.currentUser
+                                Toast.makeText(
+                                    activity,
+                                    "Hosgeldin ${user?.email.toString()}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                var intent = Intent(activity, NavigationBarActivity::class.java)
+                                startActivity(intent)
+                                activity?.finish()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Please verify your email.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+
+                        } else {
+
+                            Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT)
+                                .show()
+
                         }
-
-
-                    } else {
-
-                        Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
-
+                    }.addOnFailureListener { exception ->
+                        Toast.makeText(activity, exception.localizedMessage, Toast.LENGTH_LONG)
+                            .show()
                     }
-                }.addOnFailureListener { exception->
-                    Toast.makeText(activity,exception.localizedMessage,Toast.LENGTH_LONG).show()
-                }
+            }
         }
 
 
